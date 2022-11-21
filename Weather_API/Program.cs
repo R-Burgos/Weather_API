@@ -10,6 +10,7 @@ namespace Weather_API
         {
             var client = new HttpClient();
             Console.WriteLine("Please enter a city to see current weather information.");
+            Console.WriteLine("Example: London, Atlanta, Miami, ect...");
             var userRequest = Console.ReadLine().ToLower();
             var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userRequest + "&appid=840005d3c112367ed01c13f5eefb177e&units=imperial";
             var userResults = client.GetStringAsync(weatherURL).Result;
