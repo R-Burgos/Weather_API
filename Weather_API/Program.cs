@@ -9,10 +9,14 @@ namespace Weather_API
         static void Main(string[] args)
         {
             var client = new HttpClient();
+
+            var key = File.ReadAllText("appsettings.json");
+            var defaultKey = JObject.Parse(key).GetValue("DefaultKey").ToString();
+
             Console.WriteLine("Please enter a city to see current weather information.");
             Console.WriteLine("Example: London, Atlanta, Miami, ect...");
             var userRequest = Console.ReadLine().ToLower();
-            var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userRequest + "&appid=840005d3c112367ed01c13f5eefb177e&units=imperial";
+            var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userRequest + "&appid=" + defaultKey + "&units=imperial";
             var userResults = client.GetStringAsync(weatherURL).Result;
       
             var userCoordsInfo = JObject.Parse(userResults).GetValue("coord").ToString();
